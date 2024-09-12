@@ -1,6 +1,6 @@
 # Configure the AWS provider
 provider "aws" {
-  region = "us-west-2"  # Change this to your desired region
+  region = "us-east-1"  # Change this to your desired region
 }
 
 # Define variables
@@ -9,7 +9,7 @@ variable "instance_type" {
 }
 
 variable "ami_id" {
-  default = "ami-0c55b159cbfafe1f0"  # Amazon Linux 2 AMI, update as needed
+  default = "ami-0e86e20dae9224db8"  
 }
 
 # Create a VPC
