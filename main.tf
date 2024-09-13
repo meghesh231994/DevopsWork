@@ -8,10 +8,15 @@ data "aws_vpc" "default" {
   default = true
 }
 
+# Data source to get the availability zones
+data "aws_availability_zones" "available" {
+  state = "available"
+}
+
 # Data source to get the default subnet in the first availability zone
 data "aws_subnet" "default" {
   vpc_id            = data.aws_vpc.default.id
-  availability_zone = "${data.aws_vpc.default.region}a"
+  availability_zone = data.aws_availability_zones.available.names[0]
   default_for_az    = true
 }
 
@@ -53,7 +58,7 @@ resource "aws_security_group" "allow_ssh_http" {
 resource "aws_instance" "example" {
   count                  = 3
   ami                    = "ami-0c55b159cbfafe1f0"  # Amazon Linux 2 AMI, update as needed
-  instance_type          = "t2.micro"
+  instance_type          = "t2.medium"
   subnet_id              = data.aws_subnet.default.id
   vpc_security_group_ids = [aws_security_group.allow_ssh_http.id]
 
