@@ -57,7 +57,7 @@ resource "aws_security_group" "allow_ssh_http" {
 # Create EC2 instances
 resource "aws_instance" "example" {
   count                  = 3
-  ami                    = "ami-0c55b159cbfafe1f0"  # Amazon Linux 2 AMI, update as needed
+  ami                    = "ami-0182f373e66f89c85"  # Amazon Linux 2 AMI, update as needed
   instance_type          = "t2.medium"
   subnet_id              = data.aws_subnet.default.id
   vpc_security_group_ids = [aws_security_group.allow_ssh_http.id]
